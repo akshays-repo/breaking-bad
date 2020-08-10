@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import {Apicall} from './Apicall/Apicall'
+import Banner from './components/banner';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () =>{
+
+  const [currentQuote, setCurrentQuote] = useState("Say my name.")
+  const [author, setAuthor] = useState("")
+
+  
+  const callapi = () =>(
+    Apicall().then(response => {
+
+      setCurrentQuote(response[0].quote)
+      setAuthor(response[0].author)
+
+    })
+  )
+
+  useEffect(() => {
+     setInterval(() => {
+    callapi();
+  }, 10000);
+  },[]);
+
+
+  return(
+    <div>
+      <Banner quote={currentQuote} Author={author} nextquote={callapi}/>
+      </div>
+    
+    
+      )
 }
 
 export default App;
