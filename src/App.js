@@ -7,7 +7,7 @@ import Banner from './components/banner';
 const App = () =>{
 
   const [currentQuote, setCurrentQuote] = useState("Say my name.")
-  const [author, setAuthor] = useState("")
+  const [author, setAuthor] = useState("- Hesinberg")
 
   
   const callapi = () =>(
